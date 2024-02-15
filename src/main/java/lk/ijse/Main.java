@@ -45,14 +45,27 @@ public class Main {
         session.save(book3);
         session.save(book4);
 
+
          */
 
 
-        //01 .retrive details where year>=2010
-        Query query = session.createQuery("select title from Book where year>=2010");
-        List resultList = query.getResultList();
 
+        //01 .retrive details where year>=2010
+       /* Query query = session.createQuery("select title from Book where year>=2010");
+        List resultList = query.getResultList();
         System.out.println(resultList.toString());;
+        */
+
+
+
+        //02.update query to increase the price of all books
+       /* Query query = session.createQuery("update Book B set B.price =(B.price )* 1.1 where B.author.id = :authorId");
+        query.setParameter("authorId", "A003");
+        int result = query.executeUpdate();
+        System.out.println("Result: " + result);
+        */
+
+
 
         transaction.commit();
         session.close();
