@@ -18,3 +18,7 @@
      This annotation use to define a one-to-many relationship between two entities, where one entity has a collection of instances of another entity. 
 
 
+# **@GeneratedValue**
+ 
+     This annotation use to Automatically generate a primary ky value.
+    
