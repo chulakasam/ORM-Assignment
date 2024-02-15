@@ -49,13 +49,13 @@ public class Main {
 
 
         //01 .retrive details where year>=2010
-       /* Query query = session.createQuery("select title from Book where year>=2010");
+        /* Query query = session.createQuery("select title from Book where year>=2010");
         List resultList = query.getResultList();
         System.out.println(resultList.toString());
         */
 
         //02.update query to increase the price of all books
-       /* Query query = session.createQuery("update Book B set B.price =(B.price )* 1.1 where B.author.id = :authorId");
+        /* Query query = session.createQuery("update Book B set B.price =(B.price )* 1.1 where B.author.id = :authorId");
         query.setParameter("authorId", "A003");
         int result = query.executeUpdate();
         System.out.println("Result: " + result);
@@ -68,12 +68,23 @@ public class Main {
         */
 
         //05.all authors along with the count of books they have written.
-        Query query = session.createQuery("select A.id,count(B.id) from Author A join Book B on A.id=B.author.id group by A.id");
+        /*Query query = session.createQuery("select A.id,count(B.id) from Author A join Book B on A.id=B.author.id group by A.id");
         List <Object[]> list = query.getResultList();
 
         for(Object[] obj:list){
             System.out.println(obj[0]+ " "+obj[1]);
         }
+         */
+
+        //06.retrieve books written by authors from a specific country.
+        Query query = session.createQuery("select B.title from Book B join Author A on B.author.id=A.id where A.country=:country");
+        query.setParameter("country","USA");
+        List list = query.getResultList();
+
+        for (Object obj : list) {
+            System.out.println(obj);
+        }
+
 
 
         transaction.commit();
