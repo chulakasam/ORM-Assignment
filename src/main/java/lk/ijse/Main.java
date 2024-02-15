@@ -65,6 +65,11 @@ public class Main {
         System.out.println("Result: " + result);
         */
 
+        //04.the average price of all books.
+        Query query = session.createQuery("SELECT AVG(b.price) FROM Book b");
+        Double avg = (Double) query.getSingleResult();;
+        System.out.println(avg);
+
 
 
         transaction.commit();
