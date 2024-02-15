@@ -1,5 +1,6 @@
 package lk.ijse;
 
+import jakarta.persistence.Query;
 import lk.ijse.Config.FactoryConfiguration;
 import lk.ijse.Entity.Author;
 import lk.ijse.Entity.Book;
@@ -15,7 +16,7 @@ public class Main {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        Author author1 = new Author("A001","Davin","UK",null);
+        /*Author author1 = new Author("A001","Davin","UK",null);
         Author author2 = new Author("A002","kevin","USA",null);
         Author author3 = new Author("A003","Michel","France",null);
         Author author4 = new Author("A004","Stack","USA",null);
@@ -44,7 +45,19 @@ public class Main {
         session.save(book3);
         session.save(book4);
 
+         */
+
+
+        //01 .retrive details where year>=2010
+        Query query = session.createQuery("select title from Book where year>=2010");
+        List resultList = query.getResultList();
+
+        System.out.println(resultList.toString());;
+
         transaction.commit();
         session.close();
+
+
+
     }
 }
