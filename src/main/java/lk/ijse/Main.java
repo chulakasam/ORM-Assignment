@@ -1,11 +1,11 @@
 package lk.ijse;
 
-import jakarta.persistence.Query;
 import lk.ijse.Config.FactoryConfiguration;
 import lk.ijse.Entity.Author;
 import lk.ijse.Entity.Book;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -44,19 +44,15 @@ public class Main {
         session.save(book2);
         session.save(book3);
         session.save(book4);
-
-
-         */
+        */
 
 
 
         //01 .retrive details where year>=2010
        /* Query query = session.createQuery("select title from Book where year>=2010");
         List resultList = query.getResultList();
-        System.out.println(resultList.toString());;
+        System.out.println(resultList.toString());
         */
-
-
 
         //02.update query to increase the price of all books
        /* Query query = session.createQuery("update Book B set B.price =(B.price )* 1.1 where B.author.id = :authorId");
@@ -66,10 +62,18 @@ public class Main {
         */
 
         //04.the average price of all books.
-        Query query = session.createQuery("SELECT AVG(b.price) FROM Book b");
-        Double avg = (Double) query.getSingleResult();;
-        System.out.println(avg);
+        /*Query query = session.createQuery("SELECT AVG(b.price) FROM Book b");
+        Double avg = (Double) query.getSingleResult();
+        System.out.println("average price :"+ avg);
+        */
 
+        //05.all authors along with the count of books they have written.
+        Query query = session.createQuery("select A.id,count(B.id) from Author A join Book B on A.id=B.author.id group by A.id");
+        List <Object[]> list = query.getResultList();
+
+        for(Object[] obj:list){
+            System.out.println(obj[0]+ " "+obj[1]);
+        }
 
 
         transaction.commit();
