@@ -87,12 +87,14 @@ public class Main {
         */
 
         //10.find authors who have written more than the average number of books.
-        Query query = session.createQuery("select A.name FROM Author A WHERE ( SELECT COUNT(B.id) FROM Book B WHERE A.id = B.author.id ) > ( SELECT AVG(Count) FROM ( SELECT COUNT(B.id) AS Count FROM Book B GROUP BY B.author.id ))");
-        List<Object> resultList = query.getResultList();
+        /*Query query = session.createQuery("select A.name FROM Author A WHERE ( SELECT COUNT(B.id) FROM Book B WHERE A.id = B.author.id ) > ( SELECT AVG(Count) FROM ( SELECT COUNT(B.id) AS Count FROM Book B GROUP BY B.author.id ))");
+        List<Object> list = query.getResultList();
 
-        for(Object obj:resultList){
+        for(Object obj:list){
             System.out.println(obj);
         }
+        */
+
 
 
         transaction.commit();
