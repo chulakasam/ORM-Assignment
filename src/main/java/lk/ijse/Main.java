@@ -77,14 +77,22 @@ public class Main {
          */
 
         //06.retrieve books written by authors from a specific country.
-        Query query = session.createQuery("select B.title from Book B join Author A on B.author.id=A.id where A.country=:country");
+        /*Query query = session.createQuery("select B.title from Book B join Author A on B.author.id=A.id where A.country=:country");
         query.setParameter("country","USA");
         List list = query.getResultList();
 
         for (Object obj : list) {
             System.out.println(obj);
         }
+        */
 
+        //10.find authors who have written more than the average number of books.
+        Query query = session.createQuery("select A.name FROM Author A WHERE ( SELECT COUNT(B.id) FROM Book B WHERE A.id = B.author.id ) > ( SELECT AVG(Count) FROM ( SELECT COUNT(B.id) AS Count FROM Book B GROUP BY B.author.id ))");
+        List<Object> resultList = query.getResultList();
+
+        for(Object obj:resultList){
+            System.out.println(obj);
+        }
 
 
         transaction.commit();
